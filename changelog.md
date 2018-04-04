@@ -13,3 +13,12 @@ April 2nd 2018
    as well as make Mario Jump
    
 April 4th 2018
+  
+  -This week our empahsis grew on incorporating mulitiple devices to play these side scrollers
+  
+  -We worked directly with the MicroBit Controller as well as the Tobii Eye-Tracker to make devices you can play side scrollers with
+  
+  -We also discussed ways to send keystrokes to a emulator, allowing for the playability of all 2-D Sidescrollers, not just online based 2D   games
+  
+  -We talked about how we need to create a program to send and train Wekinator, deciding what the UI may look like, as well as what the       user experince would look like for that program
+  
