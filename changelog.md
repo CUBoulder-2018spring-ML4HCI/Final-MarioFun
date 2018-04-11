@@ -22,3 +22,19 @@ April 4th 2018
   
   -We talked about how we need to create a program to send and train Wekinator, deciding what the UI may look like, as well as what the       user experince would look like for that program
   
+  Aprill 11th 2018
+  
+  -Video with content: https://youtu.be/5_Sw3kIZUX0
+  
+  -Updated Repo with folder containing feedback
+  
+  -Worked on wireframing a GUI to train wekinator 
+  
+  -Will be also working on creating the GUI based trained for Wekinator over the weekend. We most likely are looking at HTML based items 
+  at it would be easy to send packets of data through a port into wekinator this way
+  
+  -After last weeks feedback we are concentrating on refining the MicroBit experince and then moving to other technologies, we want to 
+  make the MicroBit experince refined and perfected before diverting our attention elsewhere. 
+  
+  
+  
