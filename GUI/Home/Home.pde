@@ -28,7 +28,7 @@ void setup() {
      .setSize(200,19)
      ;
      
-  cp5.addButton("View Memory")
+  cp5.addButton("Memory")
      .setPosition(100,140)
      .setSize(200,19)
      .setValue(0)
@@ -76,8 +76,8 @@ public void Train(int theValue) {
   c2 = color(150,0,0);
 }
 
-public void View_Memory(int theValue) {
-  println("a button event from View Memory: "+theValue);
+public void Memory(int theValue) {
+  println("a button event from Memory: "+theValue);
   c1 = c2;
   c2 = color(255,255,0);
 }
