@@ -1,5 +1,12 @@
 import controlP5.*;
 
+import java.awt.*;
+import oscP5.*;
+import netP5.*;
+
+
+OscP5 oscP5;
+NetAddress dest;
 ControlP5 cp5;
 
 int myColor = color(255);
@@ -10,6 +17,8 @@ float n,n1;
 
 
 void setup() {
+  oscP5 = new OscP5(this,9000);
+  dest = new NetAddress("127.0.0.1",6448);
   size(400,600);
   noStroke();
   cp5 = new ControlP5(this);
@@ -73,11 +82,18 @@ void draw() {
 public void controlEvent(ControlEvent theEvent) {
   println(theEvent.getController().getName());
   if (theEvent.getController().getName() == "Quit"){
-    exit();}
-  else {
-    if (theEvent.getController().getName() == "Start"){
-      
-    
+    exit();
+    OscMessage msg = new OscMessage("/wekinator/control/stopRunning");
+    oscP5.send(msg, dest);
+}
+  if (theEvent.getController().getName() == "Start"){
+      OscMessage msg = new OscMessage("/wekinator/control/startRunning");
+      oscP5.send(msg, dest);
+    }
+  if (theEvent.getController().getName() == "Train"){
+      OscMessage msg = new OscMessage("/wekinator/control/train");
+      oscP5.send(msg, dest);
+    }
   n = 0;
 }
 
