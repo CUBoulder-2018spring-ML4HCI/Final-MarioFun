@@ -1,68 +1,229 @@
 import controlP5.*;
 
-ControlP5 gui;
+ControlP5 cp5;
 
-void setup(){
-//set the window size
-size(600,600);
-noStroke();
-//Create the new GUI
-gui = new ControlP5(this);
-//Add a Button
-gui.addButton("Start")
-   //Set the position of the button : (X,Y)
-   .setPosition(175,200)
-   //Set the size of the button : (X,Y)
-   .setSize(100,100)
-   //Set the pre-defined Value of the button : (int)
-   .setValue(0)
-   //set the way it is activated : RELEASE the mouseboutton or PRESS it
-   .activateBy(ControlP5.RELEASE);
-   ;
+int myColor = color(255);
 
-gui.addButton("Train")
-   //Set the position of the button : (X,Y)
-   .setPosition(325,200)
-   //Set the size of the button : (X,Y)
-   .setSize(100,100)
-   //Set the pre-defined Value of the button : (int)
-   .setValue(0)
-   //set the way it is activated : RELEASE the mouseboutton or PRESS it
-   .activateBy(ControlP5.RELEASE);
-   ;
+int c1,c2;
 
-gui.addButton("View Memory")
-   //Set the position of the button : (X,Y)
-   .setPosition(175,350)
-   //Set the size of the button : (X,Y)
-   .setSize(100,100)
-   //Set the pre-defined Value of the button : (int)
-   .setValue(0)
-   //set the way it is activated : RELEASE the mouseboutton or PRESS it
-   .activateBy(ControlP5.RELEASE);
-   ;
-   
-gui.addButton("About")
-   //Set the position of the button : (X,Y)
-   .setPosition(325,350)
-   //Set the size of the button : (X,Y)
-   .setSize(100,100)
-   //Set the pre-defined Value of the button : (int)
-   .setValue(0)
-   //set the way it is activated : RELEASE the mouseboutton or PRESS it
-   .activateBy(ControlP5.RELEASE);
-   ;
+float n,n1;
+
+
+void setup() {
+  size(400,600);
+  noStroke();
+  cp5 = new ControlP5(this);
+
+  //Declare, and define buttons
+  cp5.addButton("Start")
+     .setValue(0)
+     .setPosition(100,100)
+     .setSize(200,19)
+     ;
+  
+  //Adding more buttons
+  cp5.addButton("Train")
+     .setValue(100)
+     .setPosition(100,120)
+     .setSize(200,19)
+     ;
+     
+  cp5.addButton("View Memory")
+     .setPosition(100,140)
+     .setSize(200,19)
+     .setValue(0)
+     ;
+
+  PImage[] imgs = {loadImage("button_a.png"),loadImage("button_b.png"),loadImage("button_c.png")};
+  cp5.addButton("About")
+     .setValue(128)
+     .setPosition(140,300)
+     .setImages(imgs)
+     .updateSize()
+     ;
+     
+  cp5.addButton("Quit")
+     .setValue(128)
+     .setPosition(210,300)
+     .setImages(imgs)
+     .updateSize()
+     ;
+
 }
 
-public void PressMe(int value){
-// This is the place for the code, that is activated by the buttonb
-println("Button pressed");
+void draw() {
+  background(myColor);
+  myColor = lerpColor(c1,c2,n);
+  n += (1-n)* 0.1; 
 }
 
+//Event Handler
 public void controlEvent(ControlEvent theEvent) {
-//Is called whenever a GUI Event happened
+  println(theEvent.getController().getName());
+  n = 0;
 }
 
-void draw(){
-//Do whatever you want
+//Button events
+public void Start(int theValue) {
+  println("a button event from Start: "+theValue);
+  c1 = c2;
+  c2 = color(0,160,100);
 }
+
+public void Train(int theValue) {
+  println("a button event from Train: "+theValue);
+  c1 = c2;
+  c2 = color(150,0,0);
+}
+
+public void View_Memory(int theValue) {
+  println("a button event from View Memory: "+theValue);
+  c1 = c2;
+  c2 = color(255,255,0);
+}
+
+public void About(int theValue) {
+  println("a button event from About: "+theValue);
+  c1 = c2;
+  c2 = color(0,0,0);
+}
+
+public void Quit(int theValue) {
+  println("a button event from Quit: "+theValue);
+  c1 = c2;
+  c2 = color(0,0,0);
+}
+
+
+
+/*
+a list of all methods available for the Button Controller
+use ControlP5.printPublicMethodsFor(Button.class);
+to print the following list into the console.
+
+You can find further details about class Button in the javadoc.
+
+Format:
+ClassName : returnType methodName(parameter type)
+
+
+controlP5.Button : Button activateBy(int) 
+controlP5.Button : Button setOff() 
+controlP5.Button : Button setOn() 
+controlP5.Button : Button setSwitch(boolean) 
+controlP5.Button : Button setValue(float) 
+controlP5.Button : Button update() 
+controlP5.Button : String getInfo() 
+controlP5.Button : String toString() 
+controlP5.Button : boolean getBooleanValue() 
+controlP5.Button : boolean isOn() 
+controlP5.Button : boolean isPressed() 
+controlP5.Controller : Button addCallback(CallbackListener) 
+controlP5.Controller : Button addListener(ControlListener) 
+controlP5.Controller : Button bringToFront() 
+controlP5.Controller : Button bringToFront(ControllerInterface) 
+controlP5.Controller : Button hide() 
+controlP5.Controller : Button linebreak() 
+controlP5.Controller : Button listen(boolean) 
+controlP5.Controller : Button lock() 
+controlP5.Controller : Button plugTo(Object) 
+controlP5.Controller : Button plugTo(Object, String) 
+controlP5.Controller : Button plugTo(Object[]) 
+controlP5.Controller : Button plugTo(Object[], String) 
+controlP5.Controller : Button registerProperty(String) 
+controlP5.Controller : Button registerProperty(String, String) 
+controlP5.Controller : Button registerTooltip(String) 
+controlP5.Controller : Button removeBehavior() 
+controlP5.Controller : Button removeCallback() 
+controlP5.Controller : Button removeCallback(CallbackListener) 
+controlP5.Controller : Button removeListener(ControlListener) 
+controlP5.Controller : Button removeProperty(String) 
+controlP5.Controller : Button removeProperty(String, String) 
+controlP5.Controller : Button setArrayValue(float[]) 
+controlP5.Controller : Button setArrayValue(int, float) 
+controlP5.Controller : Button setBehavior(ControlBehavior) 
+controlP5.Controller : Button setBroadcast(boolean) 
+controlP5.Controller : Button setCaptionLabel(String) 
+controlP5.Controller : Button setColor(CColor) 
+controlP5.Controller : Button setColorActive(int) 
+controlP5.Controller : Button setColorBackground(int) 
+controlP5.Controller : Button setColorCaptionLabel(int) 
+controlP5.Controller : Button setColorForeground(int) 
+controlP5.Controller : Button setColorValueLabel(int) 
+controlP5.Controller : Button setDecimalPrecision(int) 
+controlP5.Controller : Button setDefaultValue(float) 
+controlP5.Controller : Button setHeight(int) 
+controlP5.Controller : Button setId(int) 
+controlP5.Controller : Button setImages(PImage, PImage, PImage) 
+controlP5.Controller : Button setImages(PImage, PImage, PImage, PImage) 
+controlP5.Controller : Button setLabelVisible(boolean) 
+controlP5.Controller : Button setLock(boolean) 
+controlP5.Controller : Button setMax(float) 
+controlP5.Controller : Button setMin(float) 
+controlP5.Controller : Button setMouseOver(boolean) 
+controlP5.Controller : Button setMoveable(boolean) 
+controlP5.Controller : Button setPosition(PVector) 
+controlP5.Controller : Button setPosition(float, float) 
+controlP5.Controller : Button setSize(PImage) 
+controlP5.Controller : Button setSize(int, int) 
+controlP5.Controller : Button setStringValue(String) 
+controlP5.Controller : Button setUpdate(boolean) 
+controlP5.Controller : Button setValueLabel(String) 
+controlP5.Controller : Button setView(ControllerView) 
+controlP5.Controller : Button setVisible(boolean) 
+controlP5.Controller : Button setWidth(int) 
+controlP5.Controller : Button show() 
+controlP5.Controller : Button unlock() 
+controlP5.Controller : Button unplugFrom(Object) 
+controlP5.Controller : Button unplugFrom(Object[]) 
+controlP5.Controller : Button unregisterTooltip() 
+controlP5.Controller : Button update() 
+controlP5.Controller : Button updateSize() 
+controlP5.Controller : CColor getColor() 
+controlP5.Controller : ControlBehavior getBehavior() 
+controlP5.Controller : ControlWindow getControlWindow() 
+controlP5.Controller : ControlWindow getWindow() 
+controlP5.Controller : ControllerProperty getProperty(String) 
+controlP5.Controller : ControllerProperty getProperty(String, String) 
+controlP5.Controller : Label getCaptionLabel() 
+controlP5.Controller : Label getValueLabel() 
+controlP5.Controller : List getControllerPlugList() 
+controlP5.Controller : PImage setImage(PImage) 
+controlP5.Controller : PImage setImage(PImage, int) 
+controlP5.Controller : PVector getAbsolutePosition() 
+controlP5.Controller : PVector getPosition() 
+controlP5.Controller : String getAddress() 
+controlP5.Controller : String getInfo() 
+controlP5.Controller : String getName() 
+controlP5.Controller : String getStringValue() 
+controlP5.Controller : String toString() 
+controlP5.Controller : Tab getTab() 
+controlP5.Controller : boolean isActive() 
+controlP5.Controller : boolean isBroadcast() 
+controlP5.Controller : boolean isInside() 
+controlP5.Controller : boolean isLabelVisible() 
+controlP5.Controller : boolean isListening() 
+controlP5.Controller : boolean isLock() 
+controlP5.Controller : boolean isMouseOver() 
+controlP5.Controller : boolean isMousePressed() 
+controlP5.Controller : boolean isMoveable() 
+controlP5.Controller : boolean isUpdate() 
+controlP5.Controller : boolean isVisible() 
+controlP5.Controller : float getArrayValue(int) 
+controlP5.Controller : float getDefaultValue() 
+controlP5.Controller : float getMax() 
+controlP5.Controller : float getMin() 
+controlP5.Controller : float getValue() 
+controlP5.Controller : float[] getArrayValue() 
+controlP5.Controller : int getDecimalPrecision() 
+controlP5.Controller : int getHeight() 
+controlP5.Controller : int getId() 
+controlP5.Controller : int getWidth() 
+controlP5.Controller : int listenerSize() 
+controlP5.Controller : void remove() 
+controlP5.Controller : void setView(ControllerView, int) 
+java.lang.Object : String toString() 
+java.lang.Object : boolean equals(Object) 
+
+
+*/
