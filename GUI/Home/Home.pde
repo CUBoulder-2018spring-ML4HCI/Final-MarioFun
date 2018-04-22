@@ -16,34 +16,49 @@ void setup() {
 
   //Declare, and define buttons
   cp5.addButton("Start")
+     .setBroadcast(false)
      .setValue(0)
      .setPosition(100,100)
      .setSize(200,19)
+     .setBroadcast(true)
+     .activateBy(ControlP5.RELEASE)
      ;
   
   //Adding more buttons
   cp5.addButton("Train")
+     .setBroadcast(false)
      .setValue(100)
      .setPosition(100,120)
      .setSize(200,19)
+     .setBroadcast(true)
+     .activateBy(ControlP5.RELEASE)
      ;
      
   cp5.addButton("Memory")
+     .setBroadcast(false)
      .setPosition(100,140)
      .setSize(200,19)
      .setValue(0)
+     .setBroadcast(true)
+     .activateBy(ControlP5.RELEASE)
      ;
 
   cp5.addButton("About")
+     .setBroadcast(false)
      .setValue(128)
      .setPosition(140,300)
      .updateSize()
+     .setBroadcast(true)
+     .activateBy(ControlP5.RELEASE)
      ;
      
   cp5.addButton("Quit")
+     .setBroadcast(false)
      .setValue(128)
      .setPosition(210,300)
      .updateSize()
+     .setBroadcast(true)
+     .activateBy(ControlP5.RELEASE)
      ;
 
 }
@@ -57,6 +72,12 @@ void draw() {
 //Event Handler
 public void controlEvent(ControlEvent theEvent) {
   println(theEvent.getController().getName());
+  if (theEvent.getController().getName() == "Quit"){
+    exit();}
+  else {
+    if (theEvent.getController().getName() == "Start"){
+      
+    
   n = 0;
 }
 
