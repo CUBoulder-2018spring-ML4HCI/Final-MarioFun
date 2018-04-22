@@ -39,6 +39,8 @@ April 4th 2018
   
   April 18th 2018
   
+  -Video with content: https://youtu.be/6d6kb41GQ70
+  
   -Scrapping the HTML GUI interface, shifting to higher order languauge like Java/Python
   
   -Making MicroBit communicate with computer wireless 
