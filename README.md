@@ -15,7 +15,7 @@ Put video here
 
 ## Running the Program
 Basic summary of instructions to use our application
-1. Start the python serial program
+1. Start the python serial program (do this via command line: 'python serialreader.py')
 2. Open the wekinator setup page, and make sure model used is neural network
 3. Press the start listening button on setup page, and leave the page as is.
 4. Launch the GUI (home.pde)
