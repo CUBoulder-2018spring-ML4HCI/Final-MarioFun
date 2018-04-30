@@ -9,7 +9,7 @@ Designed and built by
 For CSCI-4830 with Prof. Ben Shapiro and Asst. Prof. William Temple  
 
 ## Video
-Put video here
+https://youtu.be/metbCc2AAfQ
 
 
 
