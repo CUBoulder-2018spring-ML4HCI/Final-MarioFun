@@ -48,4 +48,16 @@ April 4th 2018
   -Updated Repo with folder containing feedback
   
   -Concentrating on making the whole experince better, looking at other games to incorporate (we have been using Mario but would like to    extend more options to the user)
-  
+ 
+ 
+  April 29th 2018
+ 
+-Finished Final Project 
+
+-Worked specifically on the refining existing features on the project
+
+-MircoBit fully wireless and uses Java to now send messages to wekinator
+
+-GUI built to train wekinator for users with little to no experience with wekinator
+
+-Worked on Final Proposal and Video (to be submitted on May 4th)
