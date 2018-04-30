@@ -1,28 +1,44 @@
 import controlP5.*;
 
 import java.awt.*;
+import java.io.*;
 import oscP5.*;
 import netP5.*;
-import java.io.*;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
+Robot robot;
+OscP5 oscP5c;
+NetAddress destc;
 OscP5 oscP5;
 NetAddress dest;
 ControlP5 cp5;
 
 int myColor = color(255);
-
+float[] oscrec= new float[100];
 int c1,c2;
 int getsize;
 float n,n1;
 String lastInput = new String();
 String currentInput = new String();
-
+int t=0;
+String[] robarr = new String[100];
 void setup() {
+  oscP5c = new OscP5(this,12000); //listen for OSC messages on port 12000 (Wekinator default)
+  destc = new NetAddress("127.0.0.1",6448);
   oscP5 = new OscP5(this,9000);
   dest = new NetAddress("127.0.0.1",6448);
   size(400,600);
   noStroke();
+  try { 
+    robot = new Robot();
+  } catch (AWTException e) {
+    e.printStackTrace();
+    exit();
+  }
   cp5 = new ControlP5(this);
+
 
   //Declare, and define buttons
   cp5.addButton("Start")
@@ -33,7 +49,6 @@ void setup() {
      .setBroadcast(true)
      .activateBy(ControlP5.RELEASE)
      ;
-  
   //Adding more buttons
   cp5.addButton("Train")
      .setBroadcast(false)
@@ -61,7 +76,14 @@ void setup() {
      .setBroadcast(true)
      .activateBy(ControlP5.RELEASE)
      ;
-     
+  cp5.addButton("Controller Set Up")
+     .setBroadcast(false)
+     .setValue(128)
+     .setPosition(200,500)
+     .updateSize()
+     .setBroadcast(true)
+     .activateBy(ControlP5.RELEASE)
+     ;
   cp5.addButton("Quit")
      .setBroadcast(false)
      .setValue(128)
@@ -89,11 +111,105 @@ String[] Submit(){
 }
 
 int flag=0;
+
 void draw() {
   background(myColor);
   myColor = lerpColor(c1,c2,n);
   n += (1-n)* 0.1; 
+  int w=0;
+  int z=0;
+  String[] arr=Submit();
+  int p=70;
+  while (w<arr.length){
+    if (oscrec[w]>0.5){
+      p=w;
+      z++;
+    }
+    w++;
+  }
+  if (p!=70){
+  if (robarr[p]=="A"){robot.keyPress(KeyEvent.VK_A);}
+  else {robot.keyRelease(KeyEvent.VK_A);}
+  
+  if (robarr[p]=="B"){robot.keyPress(KeyEvent.VK_B);}
+  else {robot.keyRelease(KeyEvent.VK_B);}
+  
+  if (robarr[p]=="C"){robot.keyPress(KeyEvent.VK_C);}
+  else {robot.keyRelease(KeyEvent.VK_C);}
+  
+  if (robarr[p]=="D"){robot.keyPress(KeyEvent.VK_D);}
+  else {robot.keyRelease(KeyEvent.VK_D);}
+  
+  if (robarr[p]=="E"){robot.keyPress(KeyEvent.VK_E);}
+  else {robot.keyRelease(KeyEvent.VK_E);}
+  
+  if (robarr[p]=="F"){robot.keyPress(KeyEvent.VK_F);}
+  else {robot.keyRelease(KeyEvent.VK_F);}
+  
+  if (robarr[p]=="G"){robot.keyPress(KeyEvent.VK_G);}
+  else {robot.keyRelease(KeyEvent.VK_G);}
+  
+  if (robarr[p]=="H"){robot.keyPress(KeyEvent.VK_H);}
+  else {robot.keyRelease(KeyEvent.VK_H);}
+  
+  if (robarr[p]=="I"){robot.keyPress(KeyEvent.VK_I);}
+  else {robot.keyRelease(KeyEvent.VK_I);}
+  
+  if (robarr[p]=="J"){robot.keyPress(KeyEvent.VK_J);}
+  else {robot.keyRelease(KeyEvent.VK_J);}
+  
+  if (robarr[p]=="K"){robot.keyPress(KeyEvent.VK_K);}
+  else {robot.keyRelease(KeyEvent.VK_K);}
+  
+  if (robarr[p]=="L"){robot.keyPress(KeyEvent.VK_L);}
+  else {robot.keyRelease(KeyEvent.VK_L);}
+  
+  if (robarr[p]=="M"){robot.keyPress(KeyEvent.VK_M);}
+  else {robot.keyRelease(KeyEvent.VK_M);}
+  
+  if (robarr[p]=="N"){robot.keyPress(KeyEvent.VK_N);}
+  else {robot.keyRelease(KeyEvent.VK_N);}
+  
+  if (robarr[p]=="O"){robot.keyPress(KeyEvent.VK_O);}
+  else {robot.keyRelease(KeyEvent.VK_O);}
+  
+  if (robarr[p]=="P"){robot.keyPress(KeyEvent.VK_P);}
+  else {robot.keyRelease(KeyEvent.VK_P);}
+  
+  if (robarr[p]=="Q"){robot.keyPress(KeyEvent.VK_Q);}
+  else {robot.keyRelease(KeyEvent.VK_Q);}
+  
+  if (robarr[p]=="R"){robot.keyPress(KeyEvent.VK_R);}
+  else {robot.keyRelease(KeyEvent.VK_R);}
+  
+  if (robarr[p]=="S"){robot.keyPress(KeyEvent.VK_S);}
+  else {robot.keyRelease(KeyEvent.VK_S);}
+  
+  if (robarr[p]=="T"){robot.keyPress(KeyEvent.VK_T);}
+  else {robot.keyRelease(KeyEvent.VK_T);}
+  
+  if (robarr[p]=="U"){robot.keyPress(KeyEvent.VK_U);}
+  else {robot.keyRelease(KeyEvent.VK_U);}
+  
+  if (robarr[p]=="V"){robot.keyPress(KeyEvent.VK_V);}
+  else {robot.keyRelease(KeyEvent.VK_V);}
+  
+  if (robarr[p]=="W"){robot.keyPress(KeyEvent.VK_W);}
+  else {robot.keyRelease(KeyEvent.VK_W);}
+  
+  if (robarr[p]=="X"){robot.keyPress(KeyEvent.VK_X);}
+  else {robot.keyRelease(KeyEvent.VK_X);}
+  
+  if (robarr[p]=="Y"){robot.keyPress(KeyEvent.VK_Y);}
+  else {robot.keyRelease(KeyEvent.VK_Y);
+
+  if (robarr[p]=="z"){robot.keyPress(KeyEvent.VK_Z);}
+  else {robot.keyRelease(KeyEvent.VK_Z);}
 }
+  
+  }
+}
+
 int q=0;
 //Event Handler
 public void controlEvent(ControlEvent theEvent) {
@@ -102,6 +218,47 @@ public void controlEvent(ControlEvent theEvent) {
     exit();
     OscMessage msg = new OscMessage("/wekinator/control/stopRunning");
     oscP5.send(msg, dest);
+}
+if (theEvent.getController().getName() == "Controller Set Up"){
+    String[] arr=Submit();
+      println("Enter a key to map with: ",arr[t]);
+      delay(1000);
+      if (keyPressed == true){
+        if (key=='a' || key=='A'){robarr[t]="A";}
+        if (key=='b' || key=='B'){robarr[t]="B";}
+        if (key=='c' || key=='C'){robarr[t]="C";}
+        if (key=='d' || key=='D'){robarr[t]="D";}
+        if (key=='e' || key=='E'){robarr[t]="E";}
+        if (key=='f' || key=='F'){robarr[t]="F";}
+        if (key=='g' || key=='G'){robarr[t]="G";}
+        if (key=='h' || key=='H'){robarr[t]="H";}
+        if (key=='i' || key=='I'){robarr[t]="I";}
+        if (key=='j' || key=='J'){robarr[t]="J";}
+        if (key=='k' || key=='K'){robarr[t]="K";}
+        if (key=='l' || key=='L'){robarr[t]="L";}
+        if (key=='m' || key=='M'){robarr[t]="M";}
+        if (key=='n' || key=='N'){robarr[t]="N";}
+        if (key=='o' || key=='O'){robarr[t]="O";}
+        if (key=='p' || key=='P'){robarr[t]="P";}
+        if (key=='q' || key=='Q'){robarr[t]="Q";}
+        if (key=='r' || key=='R'){robarr[t]="R";}
+        if (key=='s' || key=='S'){robarr[t]="S";}
+        if (key=='t' || key=='T'){robarr[t]="T";}
+        if (key=='u' || key=='U'){robarr[t]="U";}
+        if (key=='v' || key=='V'){robarr[t]="V";}
+        if (key=='w' || key=='W'){robarr[t]="W";}
+        if (key=='x' || key=='X'){robarr[t]="X";}
+        if (key=='y' || key=='Y'){robarr[t]="Y";}
+        if (key=='z' || key=='Z'){robarr[t]="Z";}
+        if (keyCode==UP){robarr[t]="UP";}
+        if (keyCode==DOWN){robarr[t]="DOWN";}
+        if (keyCode==RIGHT){robarr[t]="RIGHT";}
+        if (keyCode==LEFT){robarr[t]="LEFT";}
+        println(robarr[t],t);
+        
+      t++;
+    }
+    if (t>=arr.length-1){t=0;}
 }
   if (theEvent.getController().getName() == "Start"){
       OscMessage msg = new OscMessage("/wekinator/control/startRunning");
@@ -137,6 +294,7 @@ public void controlEvent(ControlEvent theEvent) {
   n = 0;
 }
 
+
 //Button events
 public void Start(int theValue) {
   println("a button event from Start: "+theValue);
@@ -166,4 +324,16 @@ public void Quit(int theValue) {
   println("a button event from Quit: "+theValue);
   c1 = c2;
   c2 = color(0,0,0);
+}
+
+void oscEvent(OscMessage theOscMessage) {
+ int x=0;
+ String[] arr=Submit();
+ oscrec= new float[100];
+  if (theOscMessage.checkAddrPattern("/wek/outputs")==true) {
+    while(x<arr.length){
+    oscrec[x] = theOscMessage.get(x).floatValue(); //get this parameter
+        x++;
+    }
+ }
 }
