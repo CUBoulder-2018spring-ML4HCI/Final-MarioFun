@@ -12,9 +12,8 @@ ControlP5 cp5;
 int myColor = color(255);
 
 int c1,c2;
-
+int getsize;
 float n,n1;
-
 String lastInput = new String();
 String currentInput = new String();
 
@@ -57,7 +56,7 @@ void setup() {
   cp5.addButton("About")
      .setBroadcast(false)
      .setValue(128)
-     .setPosition(140,300)
+     .setPosition(130,400)
      .updateSize()
      .setBroadcast(true)
      .activateBy(ControlP5.RELEASE)
@@ -66,21 +65,36 @@ void setup() {
   cp5.addButton("Quit")
      .setBroadcast(false)
      .setValue(128)
-     .setPosition(210,300)
+     .setPosition(200,400)
      .updateSize()
      .setBroadcast(true)
      .activateBy(ControlP5.RELEASE)
      ;
-
+     cp5.addTextfield("Controls").setPosition(20, 170).setSize(200, 40).setAutoClear(false);
+     cp5.addBang("Submit").setPosition(240, 170).setSize(80, 40); 
 }
 
+String[] Submit(){
+  String url1 = cp5.get(Textfield.class,"Controls").getText();
+  String[] arr = split(url1, ',');
+  int x=0;
+  OscMessage msg = new OscMessage("/wekinator/control/setOutputNames");
+  while (arr.length>x){
+    getsize=arr.length;
+    msg.add(arr[x]);
+    x++;
+  }
+  oscP5.send(msg, dest);
+  return arr;
+}
+
+int flag=0;
 void draw() {
   background(myColor);
   myColor = lerpColor(c1,c2,n);
   n += (1-n)* 0.1; 
 }
 int q=0;
-char otpt[]=new char[100];
 //Event Handler
 public void controlEvent(ControlEvent theEvent) {
   println(theEvent.getController().getName());
@@ -94,18 +108,29 @@ public void controlEvent(ControlEvent theEvent) {
       oscP5.send(msg, dest);
     }
   if (theEvent.getController().getName() == "Train"){
-    println("how many game controls do you need to control?");  
-    BufferedReader cntrls = new BufferedReader(new InputStreamReader(System.in));
-    String inpstr = cntrls.readLine();
-    int cntrl=Integer.parseInt(inpstr);
-    while (q<cntrl){
-        BufferedReader otpt = new BufferedReader(new InputStreamReader(System.in));
-        q++;
+    int x=0;
+    String[] arr=Submit();
+    float sender[]=new float[arr.length];
+    while (arr.length>x){
+      println("How do you want to control ",arr[x]," ?");
+      println("hold position for 8 seconds.");
+      delay(1000);
+      OscMessage msg = new OscMessage("/wekinator/control/outputs");
+      sender[x]=1;
+      int y=0;
+      while (arr.length>y){
+      msg.add(sender[y]);
+      y++;
       }
-      OscMessage msg = new OscMessage("/wekinator/control/ouputs");
+      sender[x]=0;
       oscP5.send(msg, dest);
+      msg = new OscMessage("/wekinator/control/startRecording");
+      oscP5.send(msg, dest);
+      delay(5000);
+      msg = new OscMessage("/wekinator/control/stopRecording");
+      oscP5.send(msg, dest);
+      x++;
     }
-  if (theEvent.getController().getName() == "Train"){
       OscMessage msg = new OscMessage("/wekinator/control/train");
       oscP5.send(msg, dest);
     }
@@ -141,21 +166,4 @@ public void Quit(int theValue) {
   println("a button event from Quit: "+theValue);
   c1 = c2;
   c2 = color(0,0,0);
-}
-
-void keyPressed()
-{
- if(key == ENTER)
- {
-   lastInput = currentInput = currentInput + key;
-   currentInput = "";
- }
- else if(key == BACKSPACE && currentInput.length() > 0)
- {
-   currentInput = currentInput.substring(0, currentInput.length() - 1);
- }
- else
- {
-   currentInput = currentInput + key;
- }
 }
