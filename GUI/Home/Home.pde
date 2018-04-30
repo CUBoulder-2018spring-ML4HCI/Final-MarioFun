@@ -3,7 +3,7 @@ import controlP5.*;
 import java.awt.*;
 import oscP5.*;
 import netP5.*;
-
+import java.io.*;
 
 OscP5 oscP5;
 NetAddress dest;
@@ -15,6 +15,8 @@ int c1,c2;
 
 float n,n1;
 
+String lastInput = new String();
+String currentInput = new String();
 
 void setup() {
   oscP5 = new OscP5(this,9000);
@@ -77,7 +79,8 @@ void draw() {
   myColor = lerpColor(c1,c2,n);
   n += (1-n)* 0.1; 
 }
-
+int q=0;
+char otpt[]=new char[100];
 //Event Handler
 public void controlEvent(ControlEvent theEvent) {
   println(theEvent.getController().getName());
@@ -88,6 +91,18 @@ public void controlEvent(ControlEvent theEvent) {
 }
   if (theEvent.getController().getName() == "Start"){
       OscMessage msg = new OscMessage("/wekinator/control/startRunning");
+      oscP5.send(msg, dest);
+    }
+  if (theEvent.getController().getName() == "Train"){
+    println("how many game controls do you need to control?");  
+    BufferedReader cntrls = new BufferedReader(new InputStreamReader(System.in));
+    String inpstr = cntrls.readLine();
+    int cntrl=Integer.parseInt(inpstr);
+    while (q<cntrl){
+        BufferedReader otpt = new BufferedReader(new InputStreamReader(System.in));
+        q++;
+      }
+      OscMessage msg = new OscMessage("/wekinator/control/ouputs");
       oscP5.send(msg, dest);
     }
   if (theEvent.getController().getName() == "Train"){
@@ -126,4 +141,21 @@ public void Quit(int theValue) {
   println("a button event from Quit: "+theValue);
   c1 = c2;
   c2 = color(0,0,0);
+}
+
+void keyPressed()
+{
+ if(key == ENTER)
+ {
+   lastInput = currentInput = currentInput + key;
+   currentInput = "";
+ }
+ else if(key == BACKSPACE && currentInput.length() > 0)
+ {
+   currentInput = currentInput.substring(0, currentInput.length() - 1);
+ }
+ else
+ {
+   currentInput = currentInput + key;
+ }
 }
