@@ -29,6 +29,11 @@ void setup() {
   destc = new NetAddress("127.0.0.1",6448);
   oscP5 = new OscP5(this,9000);
   dest = new NetAddress("127.0.0.1",6448);
+  OscMessage msg = new OscMessage("/wekinator/control/setInputNames");
+  msg.add("X");
+  msg.add("Y");
+  msg.add("Z");
+  oscP5.send(msg, dest);
   size(400,600);
   noStroke();
   try { 
@@ -258,7 +263,7 @@ if (theEvent.getController().getName() == "Controller Set Up"){
         
       t++;
     }
-    if (t>=arr.length-1){t=0;}
+    if (t>=arr.length){t=0;}
 }
   if (theEvent.getController().getName() == "Start"){
       OscMessage msg = new OscMessage("/wekinator/control/startRunning");
@@ -314,7 +319,7 @@ public void Memory(int theValue) {
   c2 = color(255,255,0);
 }
 
-public void About(int theValue) {
+public void About(int theValue) {a
   println("a button event from About: "+theValue);
   c1 = c2;
   c2 = color(0,0,150);
