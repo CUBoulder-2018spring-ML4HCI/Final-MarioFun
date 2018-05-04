@@ -206,13 +206,37 @@ void draw() {
   else {robot.keyRelease(KeyEvent.VK_X);}
   
   if (robarr[p]=="Y"){robot.keyPress(KeyEvent.VK_Y);}
-  else {robot.keyRelease(KeyEvent.VK_Y);
+  else {robot.keyRelease(KeyEvent.VK_Y);}
 
-  if (robarr[p]=="z"){robot.keyPress(KeyEvent.VK_Z);}
+  if (robarr[p]=="Z"){robot.keyPress(KeyEvent.VK_Z);}
   else {robot.keyRelease(KeyEvent.VK_Z);}
+  
+  if (robarr[p]=="UP"){robot.keyPress(KeyEvent.VK_UP);}
+  else {robot.keyRelease(KeyEvent.VK_UP);}
+  
+  if (robarr[p]=="DOWN"){robot.keyPress(KeyEvent.VK_DOWN);}
+  else {robot.keyRelease(KeyEvent.VK_DOWN);}
+  
+  if (robarr[p]=="RIGHT"){robot.keyPress(KeyEvent.VK_RIGHT);}
+  else {robot.keyRelease(KeyEvent.VK_RIGHT);}
+  
+  if (robarr[p]=="LEFT"){robot.keyPress(KeyEvent.VK_LEFT);}
+  else {robot.keyRelease(KeyEvent.VK_LEFT);}
+  
+  if (robarr[p]=="SHIFT"){robot.keyPress(KeyEvent.VK_SHIFT);}
+  else {robot.keyRelease(KeyEvent.VK_SHIFT);}
+  
+  if (robarr[p]=="CONTROL"){robot.keyPress(KeyEvent.VK_CONTROL);}
+  else {robot.keyRelease(KeyEvent.VK_CONTROL);}
+  
+  if (robarr[p]=="RETURN"){robot.keyPress(KeyEvent.VK_ENTER);}
+  else {robot.keyRelease(KeyEvent.VK_ENTER);}
+  
+  if (robarr[p]=="SPACE"){robot.keyPress(KeyEvent.VK_SPACE);}
+  else {robot.keyRelease(KeyEvent.VK_SPACE);}
+  
 }
   
-  }
 }
 
 int q=0;
@@ -259,6 +283,10 @@ if (theEvent.getController().getName() == "Controller Set Up"){
         if (keyCode==DOWN){robarr[t]="DOWN";}
         if (keyCode==RIGHT){robarr[t]="RIGHT";}
         if (keyCode==LEFT){robarr[t]="LEFT";}
+        if (keyCode==SHIFT){robarr[t]="SHIFT";}
+        if (keyCode==CONTROL){robarr[t]="CONTROL";}
+        if (keyCode==RETURN){robarr[t]="RETURN";}
+        if (key==' '){robarr[t]="SPACE";}
         println(robarr[t],t);
         
       t++;
@@ -319,7 +347,7 @@ public void Memory(int theValue) {
   c2 = color(255,255,0);
 }
 
-public void About(int theValue) {a
+public void About(int theValue) {
   println("a button event from About: "+theValue);
   c1 = c2;
   c2 = color(0,0,150);
