@@ -8,6 +8,9 @@ Designed and built by
 
 For CSCI-4830 with Prof. Ben Shapiro and Asst. Prof. William Temple  
 
+## Final Report
+https://bit.ly/2rmy1hQ
+
 ## Video
 https://youtu.be/ulU70Pa3Kfo
 
