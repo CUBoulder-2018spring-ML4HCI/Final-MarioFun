@@ -12,8 +12,7 @@ For CSCI-4830 with Prof. Ben Shapiro and Asst. Prof. William Temple
 https://bit.ly/2rmy1hQ
 
 ## Video
-https://youtu.be/ulU70Pa3Kfo
-
+https://bit.ly/2IlwOBE
 
 
 ## Running the Program
